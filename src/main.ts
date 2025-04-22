@@ -1,5 +1,17 @@
-import app from './app';
-const PORT = 5000;
+import app from "./app";
+import ConnectDb  from "./infrastructure/database/ConnectDb";
+import dotenv from "dotenv";
+
+dotenv.config();
+// Connect to the database
+
+const PORT = 50000;
 app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
+  ConnectDb()
+    .then(() => {
+      console.log("Connected to the database successfully!");
+    })
+    .catch((error) => {
+      console.error("Error connecting to the database:", error);
+    });
 });
